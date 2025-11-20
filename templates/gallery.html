@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="gallery-container">
+    
+    <div class="gallery-header">
+        <h2>Riwayat Upload</h2>
+        <p>Kumpulan gambar dataset kulit yang telah diunggah ke sistem.</p>
+    </div>
+
+    {% if images %}
+        <div class="gallery-grid">
+            {% for img in images %}
+            <div class="gallery-card">
+                <div class="image-wrapper">
+                    <img src="{{ url_for('static', filename='uploads/' + img) }}" alt="Skin Image" loading="lazy">
+                </div>
+                <div class="card-footer">
+                    <span class="filename">{{ img }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <i class="fa-regular fa-images"></i>
+            <p>Belum ada gambar yang diupload.</p>
+            <a href="{{ url_for('predict_page') }}" class="cta-button">Upload Sekarang</a>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

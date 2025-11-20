@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="predict-container">
+    
+    <div class="predict-card">
+        <div class="predict-header">
+            <h2>Deteksi Jerawat</h2>
+            <p>Upload foto area wajah yang berjerawat untuk mendapatkan analisis AI.</p>
+        </div>
+
+        <form action="/predict" method="post" enctype="multipart/form-data" id="uploadForm">
+            
+            <div class="upload-area" id="uploadArea">
+                <input type="file" name="file" id="fileInput" accept=".jpg, .jpeg, .png" hidden required>
+                
+                <div class="upload-content" id="uploadContent">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <h3>Drag & Drop gambar di sini</h3>
+                    <p>atau</p>
+                    <button type="button" class="browse-btn" onclick="document.getElementById('fileInput').click()">Pilih File</button>
+                    <p class="file-support">Supported formats: JPG, PNG, JPEG</p>
+                </div>
+
+                <div class="image-preview-box" id="previewBox" style="display: none;">
+                    <img src="" alt="Preview" id="imagePreview">
+                    <button type="button" class="remove-btn" onclick="removeImage()">
+                        <i class="fa-solid fa-trash"></i> Ganti Foto
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="analyze-btn" id="submitBtn" disabled>
+                <i class="fa-solid fa-microchip"></i> Mulai Analisis
+            </button>
+        </form>
+
+        <div id="loading" class="loading-container" style="display: none;">
+            <div class="spinner"></div>
+            <p>Sedang Menganalisis Jenis Jerawat...</p>
+        </div>
+    </div>
+
+    {% if result %}
+    <div class="result-card">
+        <div class="result-header">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <h3>Hasil Diagnosa</h3>
+        </div>
+        
+        <div class="result-content">
+            <div class="result-image">
+                {% if image_file %}
+                <img src="{{ url_for('static', filename='uploads/' + image_file) }}" alt="Uploaded Image">
+                {% endif %}
+            </div>
+            <div class="result-text">
+                <span class="label">Teridentifikasi Sebagai:</span>
+                <h2 class="acne-type">{{ result }}</h2>
+                
+                <p class="recommendation">
+                    Sistem mendeteksi pola yang sesuai dengan {{ result }}. 
+                    Pastikan berkonsultasi dengan dokter untuk penanganan lebih lanjut.
+                </p>
+                
+                <a href="{{ url_for('predict_page') }}" class="retry-btn">Coba Lagi</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const uploadContent = document.getElementById('uploadContent');
+    const previewBox = document.getElementById('previewBox');
+    const imagePreview = document.getElementById('imagePreview');
+    const submitBtn = document.getElementById('submitBtn');
+    const uploadForm = document.getElementById('uploadForm');
+    const loading = document.getElementById('loading');
+
+    // Saat file dipilih
+    fileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                uploadContent.style.display = 'none';
+                previewBox.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.classList.add('active');
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Fungsi Hapus Gambar
+    function removeImage() {
+        fileInput.value = '';
+        uploadContent.style.display = 'block';
+        previewBox.style.display = 'none';
+        submitBtn.disabled = true;
+        submitBtn.classList.remove('active');
+    }
+
+    // Animasi Loading saat Submit
+    uploadForm.addEventListener('submit', function() {
+        if (fileInput.value) {
+            loading.style.display = 'flex';
+            submitBtn.style.display = 'none';
+        }
+    });
+</script>
+{% endblock %}

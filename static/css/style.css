@@ -1,0 +1,937 @@
+/* =========================================
+   1. VARIABEL & RESET
+   ========================================= */
+:root {
+    /* Warna Utama (Sesuai Gambar 2: Biru & Putih) */
+    --primary-color: #2d9cdb;  /* Biru Cerah */
+    --primary-hover: #1b7ec2;  /* Biru Gelap (untuk hover) */
+    --text-dark: #333333;      /* Hitam untuk teks bacaan */
+    --text-grey: #666666;      /* Abu-abu untuk deskripsi */
+    --bg-light: #f8f9fc;       /* Background halaman (abu sangat muda) */
+    --white: #ffffff;          /* Putih murni untuk kartu/navbar */
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05); /* Bayangan halus */
+    --radius: 12px;            /* Kelengkungan sudut kartu */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* =========================================
+   2. NAVBAR (Menu Atas)
+   ========================================= */
+.navbar {
+    background-color: var(--white);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-color); /* Logo Biru */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: var(--text-grey);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* =========================================
+   3. CONTAINER UTAMA
+   ========================================= */
+.content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* =========================================
+   4. HERO SECTION (Judul Utama)
+   ========================================= */
+.hero {
+    padding: 50px 0 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero .hero-title {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.hero .hero-subtitle {
+    color: var(--text-grey);
+    max-width: 800px;
+    margin: 0 auto 40px;
+    font-size: 1.1rem;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    color: var(--primary-color); /* Judul Biru */
+    margin-bottom: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+/* Tombol (Style Biru Kotak) */
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 12px 35px;
+    border-radius: 6px; /* Sudut sedikit melengkung (tidak bulat penuh) */
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(45, 156, 219, 0.3);
+    border: none;
+}
+
+.cta-button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(45, 156, 219, 0.5);
+}
+
+/* =========================================
+   5. FEATURES / INFO SECTION
+   ========================================= */
+/* Pastikan class parent sesuai HTML, di sini saya pakai .features */
+.features {
+    margin-top: 30px;
+    padding: 20px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+/* --- GRID LAYOUT (Horizontal) --- */
+.cards-grid {
+    display: grid;
+    /* KUNCI: repeat(3, 1fr) memaksakan 3 kolom sejajar horizontal */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* --- TAMPILAN KARTU --- */
+.card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid #eee;
+    transition: transform 0.3s ease;
+    text-align: left;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+/* --- IKON (Perbaikan Class) --- */
+/* Mengganti .card-icon menjadi .icon-wrapper sesuai HTML Anda */
+.icon-wrapper {
+    font-size: 2rem; /* Ukuran ikon */
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.card p {
+    font-size: 0.95rem;
+    color: var(--text-grey);
+    line-height: 1.6;
+}
+
+/* --- WARNA IKON --- */
+/* Class ini ada di HTML Anda, jadi kita definisikan warnanya di sini */
+.red-icon { color: #e74c3c; }
+.blue-icon { color: #2d9cdb; }
+.green-icon { color: #27ae60; }
+
+/* =========================================
+   6. TIPS SECTION (Professional Cards)
+   ========================================= */
+.tips-section {
+    text-align: center;
+    margin: 60px auto;
+    padding: 60px 20px;
+    max-width: 1100px;
+}
+
+.tips-section .section-title {
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.tips-section .section-subtitle {
+    font-size: 1rem;
+    color: var(--text-grey);
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+}
+
+.tips-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.tip-card {
+    background-color: var(--white);
+    padding: 30px 20px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border: 1px solid #eee;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.tip-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border-color: rgba(45, 156, 219, 0.3);
+}
+
+.tip-icon-wrapper {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.tip-card h4 {
+    font-size: 1.15rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.tip-card p {
+    font-size: 0.9rem;
+    color: var(--text-grey);
+    line-height: 1.5;
+}
+
+/* =========================================
+   7. EXPLANATION BOX / HOW IT WORKS (Complex Style)
+   ========================================= */
+.how-it-works {
+    margin-top: 50px;
+    padding: 30px 0 80px; /* Sedikit tambahan padding bawah */
+}
+
+.wide-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,252,0.98));
+    border-radius: var(--radius);
+    padding: 40px; /* Padding diperbesar sedikit agar lega */
+    box-shadow: 0 8px 30px rgba(16, 24, 40, 0.06);
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+/* Grid Layout: Media (Kiri) + Content (Kanan) */
+.how-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr; /* Layout 2 Kolom */
+    gap: 50px;
+    align-items: center;
+}
+
+/* Left Media / Illustration */
+.how-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.how-illustration {
+    font-size: 5.2rem;
+    color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(45,156,219,0.12), rgba(39,174,96,0.06));
+    padding: 40px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Content Area */
+.how-content h3 {
+    margin: 0 0 15px;
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.how-content .lead {
+    color: var(--text-grey);
+    margin-bottom: 25px;
+    font-size: 1.05rem;
+}
+
+/* Steps List */
+.how-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px;
+    display: grid;
+    gap: 15px;
+}
+
+.step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.step:hover {
+    transform: translateX(5px); /* Efek geser sedikit saat hover */
+    border-color: var(--primary-color);
+}
+
+.step-icon {
+    min-width: 46px;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(45, 156, 219, 0.1); /* Menggunakan warna primary transparan */
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.step-text strong {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--text-dark);
+    font-size: 1rem;
+}
+
+.step-text p {
+    margin: 0;
+    color: var(--text-grey);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Responsive Media Queries (PENTING: Agar layout user tidak rusak di HP) */
+@media (max-width: 900px) {
+    .how-grid {
+        grid-template-columns: 1fr; /* Ubah jadi 1 kolom vertikal */
+        text-align: left;
+        gap: 30px;
+    }
+
+    .how-media {
+        margin-bottom: 20px;
+    }
+    
+    .how-illustration {
+        padding: 30px;
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .tips-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- TIPS SECTION --- */
+.tips-section {
+    text-align: center;
+    margin: 50px 0;
+    padding: 30px;
+    background-color:--bg-light; /* Abu sedikit lebih gelap dari body */
+    border-radius: var(--radius);
+}
+
+.tips-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.tip-item {
+    max-width: 200px;
+    color: var(--text-grey);
+}
+
+.tip-icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+/* --- DISCLAIMER BOX --- */
+.disclaimer-box {
+    background-color: #fff3cd; /* Kuning peringatan */
+    color: #856404;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 50px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    border: 1px solid #ffeeba;
+    font-size: 0.9rem;
+}
+
+.disclaimer-box i {
+    font-size: 1.2rem;
+    margin-top: 3px;
+}
+
+/* =========================================
+   8. PREDICT PAGE STYLING
+   ========================================= */
+.predict-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* --- KARTU UPLOAD UTAMA --- */
+.predict-card {
+    background: var(--white);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.predict-header h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.predict-header p {
+    color: var(--text-grey);
+    margin-bottom: 30px;
+}
+
+/* --- AREA DRAG & DROP --- */
+.upload-area {
+    border: 2px dashed #cbd5e0;
+    border-radius: 15px;
+    padding: 40px 20px;
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 25px;
+}
+
+.upload-area:hover {
+    border-color: var(--primary-color);
+    background-color: #f0f9ff;
+}
+
+.upload-icon {
+    font-size: 3.5rem;
+    color: #cbd5e0;
+    margin-bottom: 15px;
+}
+
+.upload-area:hover .upload-icon {
+    color: var(--primary-color);
+}
+
+.browse-btn {
+    background: none;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    margin: 10px 0;
+    transition: 0.3s;
+}
+
+.browse-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.file-support {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 10px;
+}
+
+/* --- PREVIEW GAMBAR --- */
+.image-preview-box {
+    position: relative;
+    max-width: 100%;
+}
+
+.image-preview-box img {
+    max-height: 300px;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.remove-btn {
+    display: block;
+    margin: 15px auto 0;
+    background: #ffecec;
+    color: #e74c3c;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.remove-btn:hover {
+    background: #ffcccc;
+}
+
+/* --- TOMBOL ANALISIS --- */
+.analyze-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #cbd5e0; /* Warna disable */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: not-allowed;
+    transition: 0.3s;
+}
+
+.analyze-btn.active {
+    background-color: var(--primary-color);
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(45, 156, 219, 0.4);
+}
+
+.analyze-btn.active:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* --- LOADING SPINNER --- */
+.loading-container {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    color: var(--primary-color);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(45, 156, 219, 0.2);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* =========================================
+   9. RESULT CARD STYLING
+   ========================================= */
+.result-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    overflow: hidden;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.result-header {
+    background-color: #d1fae5; /* Hijau sangat muda */
+    color: #065f46;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.result-content {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.result-image img {
+    width: 100%;
+    border-radius: 10px;
+    border: 3px solid #d1fae5;
+}
+
+.label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-grey);
+}
+
+.acne-type {
+    font-size: 2.2rem;
+    color: var(--text-dark);
+    margin: 5px 0 15px;
+    font-weight: 800;
+}
+
+.recommendation {
+    color: var(--text-grey);
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.retry-btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.retry-btn:hover {
+    background: var(--primary-hover);
+}
+
+/* Responsif untuk Result */
+@media (max-width: 768px) {
+    .result-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+/* =========================================
+   10. GALLERY PAGE STYLING
+   ========================================= */
+
+.gallery-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.gallery-header h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.gallery-header p {
+    color: var(--text-grey);
+}
+
+/* --- GRID LAYOUT --- */
+.gallery-grid {
+    display: grid;
+    /* Membuat kolom otomatis: minimal lebar 250px, maksimal memenuhi ruang */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+/* --- KARTU GALERI --- */
+.gallery-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden; /* Memastikan gambar tidak keluar dari radius */
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* --- WRAPPER GAMBAR (Kunci agar seragam) --- */
+.image-wrapper {
+    width: 100%;
+    height: 220px; /* Tentukan tinggi yang pasti */
+    background-color: #f0f0f0; /* Warna placeholder saat loading */
+    position: relative;
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* KUNCI UTAMA: Mengisi kotak tanpa gepeng */
+    object-position: center; /* Fokus ke tengah gambar */
+    transition: transform 0.5s ease;
+}
+
+/* Efek Zoom saat hover */
+.gallery-card:hover .image-wrapper img {
+    transform: scale(1.1);
+}
+
+/* --- FOOTER KARTU (Nama File) --- */
+.card-footer {
+    padding: 15px;
+    background-color: var(--white);
+    border-top: 1px solid #f5f5f5;
+}
+
+.filename {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-grey);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Memotong teks panjang dengan ... */
+}
+
+/* --- EMPTY STATE (Jika kosong) --- */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #bdc3c7;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #dcdcdc;
+}
+
+.empty-state p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    color: var(--text-grey);
+}
+
+/* =========================================
+   11. TRAINING STATS PAGE
+   ========================================= */
+
+.stats-container-page {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* --- KPI CARDS (Angka Besar) --- */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.kpi-card {
+    background: var(--white);
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-left: 5px solid transparent; /* Indikator warna di kiri */
+    transition: transform 0.3s;
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Warna Indikator Spesifik */
+.blue-card { border-left-color: #2d9cdb; }
+.green-card { border-left-color: #27ae60; }
+.red-card { border-left-color: #e74c3c; }
+.orange-card { border-left-color: #f39c12; }
+
+/* Ikon di dalam kartu */
+.kpi-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.blue-card .kpi-icon { background: rgba(45, 156, 219, 0.1); color: #2d9cdb; }
+.green-card .kpi-icon { background: rgba(39, 174, 96, 0.1); color: #27ae60; }
+.red-card .kpi-icon { background: rgba(231, 76, 60, 0.1); color: #e74c3c; }
+.orange-card .kpi-icon { background: rgba(243, 156, 18, 0.1); color: #f39c12; }
+
+.kpi-info h3 {
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.kpi-info p {
+    font-size: 0.9rem;
+    color: var(--text-grey);
+    margin: 0;
+}
+
+/* --- CHARTS SECTION --- */
+.charts-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.chart-card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid #eee;
+}
+
+.chart-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chart-card canvas {
+    min-height: 250px;
+    max-height: 300px;
+    width: 100%;
+}
+
+.chart-desc {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: var(--text-grey);
+    text-align: center;
+    font-style: italic;
+}
+
+/* --- ANALYSIS GUIDE --- */
+.analysis-box {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: var(--radius);
+    border: 1px solid #e9ecef;
+}
+
+.analysis-box h4 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.analysis-box ul {
+    padding-left: 20px;
+}
+
+.analysis-box li {
+    margin-bottom: 10px;
+    color: var(--text-grey);
+    font-size: 0.95rem;
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+    .charts-wrapper {
+        grid-template-columns: 1fr; /* Chart jadi 1 kolom di HP */
+    }
+}
+
