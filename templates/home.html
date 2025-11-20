@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    
+    <section class="hero">
+    <h1 class="hero-title">AI-Based Acne Classification System</h1>
+    <p class="hero-subtitle">
+        Sistem klasifikasi jerawat berbasis kecerdasan buatan yang menggunakan teknologi deep learning
+        untuk mengidentifikasi jenis jerawat dengan akurat. Upload gambar jerawat Anda dan dapatkan hasil
+        diagnosa instan beserta penjelasan lengkap.
+    </p>
+    <a href="{{ url_for('predict_page') }}" class="cta-button">Mulai Klasifikasi</a>
+</section>
+
+    <section class="features">
+        <h2 class="section-title">Jenis-Jenis Jerawat</h2>
+        
+        <div class="cards-grid">
+            <div class="card">
+                <div class="icon-wrapper red-icon">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+                <h3>Acne Fulminans</h3>
+                <p>
+                    Jerawat yang sangat parah dan langka, ditandai dengan lesi bernanah yang muncul 
+                    tiba-tiba, disertai demam dan nyeri sendi. Kondisi ini memerlukan penanganan medis segera.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon-wrapper blue-icon">
+                    <i class="fa-solid fa-wave-square"></i>
+                </div>
+                <h3>Acne Nodules</h3>
+                <p>
+                    Jerawat berbentuk benjolan besar, keras, dan nyeri yang terbentuk jauh di bawah 
+                    permukaan kulit. Dapat menyebabkan jaringan parut permanen jika tidak ditangani dengan tepat.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon-wrapper green-icon">
+                    <i class="fa-solid fa-virus"></i> </div>
+                <h3>Fungal Acne</h3>
+                <p>
+                    Bukan jerawat sejati, melainkan infeksi jamur pada folikel rambut (Pityrosporum folliculitis). 
+                    Terlihat seperti jerawat kecil berukuran seragam yang terasa gatal.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="how-it-works">
+        <div class="wide-card">
+            <h2 class="section-title">Cara Kerja Sistem</h2>
+            <p>
+                Sistem ini menggunakan model <strong>Convolutional Neural Network (CNN)</strong> yang telah dilatih dengan ribuan gambar 
+                jerawat untuk mengenali pola dan karakteristik unik dari setiap jenis jerawat.
+            </p>
+            <br>
+            <p>
+                Ketika Anda mengunggah gambar, sistem akan melakukan <em>preprocessing</em> pada gambar tersebut, kemudian 
+                menganalisisnya menggunakan model deep learning yang telah dioptimalkan untuk deteksi jerawat.
+            </p>
+            <br>
+            <p>
+                Hasil klasifikasi akan menunjukkan jenis jerawat yang terdeteksi beserta tingkat kepercayaan (confidence score), 
+                sehingga Anda dapat memahami kondisi kulit dengan lebih baik.
+            </p>
+        </div>
+    </section>
+
+    <section class="tips-section">
+    <h2 class="section-title">Tips Pengambilan Foto Terbaik</h2>
+    <p class="section-subtitle">Dapatkan hasil diagnosa paling akurat dengan mengikuti panduan sederhana ini:</p>
+    
+    <div class="tips-cards-grid">
+        <div class="tip-card">
+            <div class="tip-icon-wrapper">
+                <i class="fa-solid fa-lightbulb"></i> 
+            </div>
+            <h4>Pencahayaan Optimal</h4>
+            <p>Gunakan sumber cahaya alami (siang hari) atau pencahayaan buatan yang terang dan merata untuk menghindari bayangan.</p>
+        </div>
+        
+        <div class="tip-card">
+            <div class="tip-icon-wrapper">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+            </div>
+            <h4>Fokus & Close-Up</h4>
+            <p>Ambil gambar dari jarak dekat (close-up) dan pastikan area jerawat berada dalam fokus yang jelas dan tajam.</p>
+        </div>
+        
+        <div class="tip-card">
+            <div class="tip-icon-wrapper">
+                <i class="fa-solid fa-face-grimace"></i>
+            </div>
+            <h4>Wajah Bersih & Polos</h4>
+            <p>Pastikan wajah bersih dari makeup, pelembap, atau produk lain yang dapat menutupi atau mengubah kondisi jerawat.</p>
+        </div>
+    </div>
+</section>
+
+<div class="disclaimer-box">
+    <i class="fa-solid fa-circle-info"></i>
+    <p>
+        <strong>Disclaimer Medis:</strong> Hasil klasifikasi sistem ini hanya untuk tujuan referensi dan edukasi. 
+        Sistem tidak menggantikan diagnosa profesional dari dokter kulit (Dermatologist). 
+        Selalu konsultasikan kondisi kulit Anda dengan ahli medis.
+    </p>
+</div>
+
+</div>
+{% endblock %}

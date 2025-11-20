@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="stats-container-page">
+    
+    <div class="page-header">
+        <h2>Model Performance Dashboard</h2>
+        <p>Statistik hasil pelatihan model CNN Deep Learning.</p>
+    </div>
+
+    <div class="kpi-grid">
+        <div class="kpi-card blue-card">
+            <div class="kpi-icon"><i class="fa-solid fa-bullseye"></i></div>
+            <div class="kpi-info">
+                <h3>{{ stats.acc }}%</h3>
+                <p>Training Accuracy</p>
+            </div>
+        </div>
+
+        <div class="kpi-card green-card">
+            <div class="kpi-icon"><i class="fa-solid fa-check-double"></i></div>
+            <div class="kpi-info">
+                <h3>{{ stats.val_acc }}%</h3>
+                <p>Validation Accuracy</p>
+            </div>
+        </div>
+
+        <div class="kpi-card red-card">
+            <div class="kpi-icon"><i class="fa-solid fa-arrow-trend-down"></i></div>
+            <div class="kpi-info">
+                <h3>{{ stats.loss }}</h3>
+                <p>Training Loss</p>
+            </div>
+        </div>
+
+        <div class="kpi-card orange-card">
+            <div class="kpi-icon"><i class="fa-solid fa-scale-unbalanced"></i></div>
+            <div class="kpi-info">
+                <h3>{{ stats.val_loss }}</h3>
+                <p>Validation Loss</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="charts-wrapper">
+        <div class="chart-card">
+            <h3><i class="fa-solid fa-chart-column"></i> Accuracy Comparison</h3>
+            
+            <div class="chart-container-fix">
+                <canvas id="accuracyChart"></canvas>
+            </div>
+
+            <p class="chart-desc">Perbandingan akurasi saat latihan vs validasi. Nilai yang berdekatan menandakan model yang baik (Good Fit).</p>
+        </div>
+
+        <div class="chart-card">
+            <h3><i class="fa-solid fa-chart-line"></i> Loss Comparison</h3>
+            
+            <div class="chart-container-fix">
+                <canvas id="lossChart"></canvas>
+            </div>
+
+            <p class="chart-desc">Loss menggambarkan kesalahan prediksi. Semakin rendah nilai Loss, semakin akurat model bekerja.</p>
+        </div>
+    </div>
+
+    <div class="analysis-box">
+        <h4><i class="fa-solid fa-magnifying-glass-chart"></i> Analisis Singkat</h4>
+        <ul>
+            <li><strong>Good Fit:</strong> Jika Training Accuracy dan Validation Accuracy sama-sama tinggi dan berdekatan.</li>
+            <li><strong>Overfitting:</strong> Jika Training Accuracy sangat tinggi (misal 99%), tapi Validation Accuracy rendah.</li>
+            <li><strong>Underfitting:</strong> Jika kedua nilai akurasi rendah.</li>
+        </ul>
+    </div>
+
+</div>
+
+<style>
+    /* Class ini MEMAKSA grafik memiliki tinggi 300px */
+    .chart-container-fix {
+        position: relative;
+        height: 300px;
+        width: 100%;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Cek apakah library berhasil dimuat
+        if (typeof Chart === 'undefined') {
+            console.error("Chart.js library not found!");
+            return;
+        }
+
+        // Ambil data dari Flask/Jinja2
+        const trainAcc = parseFloat("{{ stats.acc|default(0) }}");
+        const valAcc = parseFloat("{{ stats.val_acc|default(0) }}");
+        const trainLoss = parseFloat("{{ stats.loss|default(0) }}");
+        const valLoss = parseFloat("{{ stats.val_loss|default(0) }}");
+
+        const colorPrimary = '#2d9cdb';
+        const colorSuccess = '#27ae60';
+        const colorDanger = '#e74c3c';
+        const colorWarning = '#f39c12';
+
+        // Config Accuracy Chart
+        const ctxAcc = document.getElementById('accuracyChart');
+        if (ctxAcc) {
+            new Chart(ctxAcc.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['Training', 'Validation'],
+                    datasets: [{
+                        label: 'Accuracy (%)',
+                        data: [trainAcc, valAcc],
+                        backgroundColor: [colorPrimary, colorSuccess],
+                        borderRadius: 6,
+                        barThickness: 60, // Batang lebih tebal biar enak dilihat
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Mengisi container .chart-container-fix
+                    scales: {
+                        y: { beginAtZero: true, max: 100 }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // Config Loss Chart
+        const ctxLoss = document.getElementById('lossChart');
+        if (ctxLoss) {
+            new Chart(ctxLoss.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['Training', 'Validation'],
+                    datasets: [{
+                        label: 'Loss Value',
+                        data: [trainLoss, valLoss],
+                        backgroundColor: [colorDanger, colorWarning],
+                        borderRadius: 6,
+                        barThickness: 60,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+    });
+</script>
+
+{% endblock %}
